@@ -43,14 +43,14 @@ const storage = multer.diskStorage({
 
 // Filtrer les fichiers (ex: images seulement)
 const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-  const allowedTypes = /jpeg|jpg|png|gif/;
+  const allowedTypes = /jpeg|jpg|png|gif|pdf/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = allowedTypes.test(file.mimetype);
 
   if (extname && mimetype) {
     cb(null, true);
   } else {
-    cb(new Error('Seules les images sont autorisées'));
+    cb(new Error('Seuls les fichiers PDF et images (JPEG, PNG, GIF) sont autorisés'))
   }
 };
 
